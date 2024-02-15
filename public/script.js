@@ -3,6 +3,7 @@ myVideo.muted = true;
 
 let myVideoStream;
 
+//function pour recuperer les appareil tel que video et mic
 navigator.mediaDevices.getUserMedia({
     video: true,
     audio: true
