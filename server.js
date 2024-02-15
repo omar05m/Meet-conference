@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const io = require('socketio')(server);
+const io = require('socket.io')(server);
 const {v4: uuidv4} = require('uuid');
 
 //specifie moteur
@@ -19,8 +19,9 @@ app.get('/:room',(req, res) =>{
 
 //configuration sockets
 io.on('connection', socket =>{
-    socket.on('join-room', ()=>{
-        console.log('joined the room');
+    socket.on('join-room', (roomId)=>{
+        socket.join(roomId);
+        socket.to(roomId).broadcast.emit("user-connected");
     })
 })
 
