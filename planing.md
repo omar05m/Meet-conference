@@ -12,6 +12,12 @@
 9- quite video call 
 
 # requirement 
-Socket.io + peerJS + Uuid + epressServer 
+Socket.io(pour etablir la communication) + peerJS + Uuid + epressServer 
 
 # the end 
+
+
+
+
+
+
