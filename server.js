@@ -25,10 +25,10 @@ app.get('/:room',(req, res) =>{
 
 //configuration sockets
 io.on('connection', socket =>{
-    socket.on('join-room', (roomId)=>{
+    socket.on('join-room', (roomId,userId)=>{
         socket.join(roomId);
         // Broadcast to everyone in the room except the sender
-        socket.to(roomId).emit("user-connected");
+        socket.to(roomId).emit("user-connected",userId);
     })
 })
 
