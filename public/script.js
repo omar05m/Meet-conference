@@ -20,14 +20,17 @@ navigator.mediaDevices.getUserMedia({
     addVideoStream(myVideo,stream)
 });
 
-socket.emit('join-room',Room_ID);
+peer.on('open', id =>{
+    socket.emit('join-room',Room_ID, id);
 
-socket.on('user-connected',() =>{
-    connecToNewUser();
+});
+
+socket.on('user-connected',(userId) =>{
+    connecToNewUser(userId);
 })
 
-const connecToNewUser = () =>{
-    console.log('new user');
+const connecToNewUser = (userId) =>{
+    console.log(userId);
 }
 
 const addVideoStream = (video, stream) =>{
