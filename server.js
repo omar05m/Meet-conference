@@ -8,7 +8,7 @@ const peerServer = ExpressPeerServer(server,{
     debug: true
 });
 
-//specifie moteur
+//specifie moteur  de template
 app.set('view engine','ejs');
 app.use(express.static('public'));
 
@@ -29,6 +29,11 @@ io.on('connection', socket =>{
         socket.join(roomId);
         // Broadcast to everyone in the room except the sender
         socket.to(roomId).emit("user-connected",userId);
+
+         //config messages
+        socket.on('message', (message) => {
+        io.to(roomId).emit('createMessage', message)
+        }); 
     })
 })
 
