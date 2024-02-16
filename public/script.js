@@ -3,6 +3,12 @@ const videoGrid = document.getElementById('video-grid');
 const myVideo = document.createElement('video');
 myVideo.muted = true;
 
+var peer = new PeerServer(undefined,{
+    path: '/peerjs',
+    host: '/',
+    port: '3030'
+});
+
 let myVideoStream;
 
 //function pour recuperer les appareil tel que video et mic
