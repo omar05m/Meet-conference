@@ -127,3 +127,18 @@ const setStopVideo = () => {
     `
     document.querySelector('.main__video_button').innerHTML = html;
   }
+
+  const shareScreen = () => {
+    navigator.mediaDevices.getDisplayMedia({ video: true })
+    .then(screenStream => {
+        const screenTrack = screenStream.getVideoTracks()[0];
+        const senders = peer.connections[Room_ID].map(conn => conn.peerConnection.getSenders().find(sender => sender.track.kind === 'video'));
+        senders.forEach(sender => sender.replaceTrack(screenTrack));
+        screenStream.getTracks()[0].onended = () => {
+            senders.forEach(sender => sender.replaceTrack(myVideoStream.getVideoTracks()[0]));
+        };
+    })
+    .catch(error => {
+        console.error('Error accessing screen:', error);
+    });
+};
